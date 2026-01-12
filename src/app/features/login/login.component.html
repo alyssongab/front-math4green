@@ -1,36 +1,11 @@
-<!--
-  ============================================================
-  LOGIN TEMPLATE - Template do Componente de Login
-  ============================================================
-  
-  CONCEITO - Template Syntax do Angular:
-  
-  {{ expressao }} -> Interpolação: exibe valor no HTML
-  [propriedade]="valor" -> Property binding: passa valor para elemento
-  (evento)="metodo()" -> Event binding: escuta eventos
-  [(ngModel)]="campo" -> Two-way binding: sincroniza nos dois sentidos
-  
-  *ngIf="condicao" -> Renderiza elemento SE condição for true
-  @if (condicao) { } -> Nova sintaxe (Angular 17+), mais limpa
-  
-  CONCEITO - Signals no Template:
-  Quando usamos signals no template, chamamos como função: mode()
-  O Angular automaticamente "observa" o signal e re-renderiza quando muda.
--->
-
-<!-- 
-  Container principal com flexbox para centralizar 
-  min-h-screen = altura mínima 100% da tela
-  bg-gradient-to-br = gradiente do canto superior-esquerdo ao inferior-direito
--->
 <div class="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
   
-  <!-- Card do formulário -->
+  <!-- card -->
   <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
     
     <!-- Cabeçalho -->
     <div class="text-center mb-8">
-      <!-- Ícone de calendário -->
+      <!-- icone calendario -->
       <div class="inline-flex items-center justify-center w-16 h-16 bg-indigo-100 rounded-full mb-4">
         <svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
@@ -39,41 +14,20 @@
       </div>
       
       <h1 class="text-2xl font-bold text-gray-800">Sistema de Agendamentos</h1>
-      
-      <!-- 
-        Texto muda baseado no modo atual
-        mode() chama o signal e retorna 'login' ou 'register'
-      -->
+
       <p class="text-gray-500 mt-2">
         {{ mode() === 'login' ? 'Entre com seu email' : 'Crie sua conta' }}
       </p>
     </div>
 
-    <!-- 
-      Formulário
-      (ngSubmit)="onSubmit()" -> chama método quando form é submetido
-      #loginForm="ngForm" -> cria referência local ao formulário
-    -->
     <form (ngSubmit)="onSubmit()" #loginForm="ngForm">
       
-      <!-- 
-        Campo Nome (só aparece no modo registro)
-        @if é a nova sintaxe condicional do Angular 17+
-        Mais limpa que *ngIf
-      -->
       @if (mode() === 'register') {
         <div class="mb-4">
           <label for="name" class="block text-sm font-medium text-gray-700 mb-2">
             Nome
           </label>
-          <!-- 
-            [(ngModel)] = Two-way binding
-            O valor do input fica sincronizado com o signal name()
-            
-            ATENÇÃO: Com signals, usamos uma sintaxe especial:
-            [ngModel]="name()" -> lê o valor do signal
-            (ngModelChange)="name.set($event)" -> atualiza o signal
-          -->
+
           <input 
             type="text" 
             id="name"
@@ -86,7 +40,6 @@
         </div>
       }
 
-      <!-- Campo Email -->
       <div class="mb-6">
         <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
           Email
@@ -102,26 +55,22 @@
         />
       </div>
 
-      <!-- 
-        Mensagem de Erro
-        Só aparece se errorMessage() tiver valor
-      -->
       @if (errorMessage()) {
         <div class="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg">
           <p class="text-sm text-red-600">{{ errorMessage() }}</p>
         </div>
       }
 
-      <!-- Botão Submit -->
+
       <button 
         type="submit"
         [disabled]="isLoading()"
         class="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        <!-- Mostra spinner ou texto baseado no estado -->
+
         @if (isLoading()) {
           <span class="inline-flex items-center">
-            <!-- Spinner SVG animado -->
+            <!-- spinner svg -->
             <svg class="animate-spin -ml-1 mr-2 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -134,7 +83,6 @@
       </button>
     </form>
 
-    <!-- Link para alternar entre login/registro -->
     <div class="mt-6 text-center">
       <button 
         type="button"
