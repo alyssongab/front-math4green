@@ -1,16 +1,3 @@
-/**
- * ============================================================
- * BOOKING PAGE COMPONENT - Página Principal de Agendamentos
- * ============================================================
- * 
- * NOVA UI:
- * - Calendário mensal para escolher o dia
- * - Painel lateral com:
- *   - Dropdown para selecionar recurso
- *   - Dropdowns para hora (1h em 1h) e minutos (15 em 15)
- *   - Lista de horários ocupados no dia
- */
-
 import { Component, OnInit, inject, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -130,9 +117,6 @@ export class BookingPageComponent implements OnInit {
       .sort((a, b) => a.startTime.localeCompare(b.startTime));
   });
 
-  /**
-   * OTIMIZAÇÃO: Agora usa userBookings que já contém só os agendamentos do usuário
-   */
   userMinutesToday = computed(() => {
     const date = this.selectedDate();
     const bookings = this.userBookings();

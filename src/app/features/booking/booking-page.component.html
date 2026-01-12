@@ -85,7 +85,6 @@
             </button>
           </div>
 
-          <!-- Cabeçalho dos Dias da Semana -->
           <div class="grid grid-cols-7 gap-1 mb-2">
             @for (day of weekDays; track day) {
               <div class="text-center text-sm font-medium text-gray-500 py-2">
@@ -94,7 +93,7 @@
             }
           </div>
 
-          <!-- Dias do Calendário -->
+          <!-- dias calendario -->
           <div class="grid grid-cols-7 gap-1">
             @for (week of calendarDays(); track $index) {
               @for (date of week; track $index) {
@@ -325,17 +324,6 @@
   </div>
 </div>
 
-<!-- 
-  ============================================================
-  MODAL DE CONFIRMAÇÃO DE AGENDAMENTO
-  ============================================================
-  
-  CONCEITO - Comunicação Pai → Filho:
-  [isOpen], [date], [slot], etc. são INPUTS - dados que o pai passa
-  
-  CONCEITO - Comunicação Filho → Pai:
-  (close) e (confirm) são OUTPUTS - eventos que o filho emite
--->
 <app-booking-modal
   [isOpen]="showModal()"
   [date]="selectedDate()"
